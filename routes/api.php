@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -25,8 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/userlogin', [AuthController::class, 'login'])->name('userlogin');
 Route::post('/userregistrattion', [AuthController::class, 'register'])->name('userlogin');
 Route::get('/getAllSchools', [SchoolController::class, 'getAllSchools'])->name('getAllSchools');
-Route::get('/getUnapprovedSchools', [SchoolController::class, 'getUnapprovedSchools'])->name('getUnapprovedSchools');
+Route::get('/getUnapprovedSchools', [AdminController::class, 'getUnapprovedSchools'])->name('getUnapprovedSchools');
 Route::middleware('auth:sanctum')->get('/my-students', [StudentController::class, 'getMyStudents']);
 Route::middleware('auth:sanctum')->post('/studentregistration', [StudentController::class, 'registerStudent']);
 Route::middleware('auth:sanctum')->post('/schoolregistration', [SchoolController::class, 'registerSchool']);
-Route::middleware('auth:sanctum')->put('/approveSchool/{schoolId}', [SchoolController::class, 'approveSchool']);
+Route::middleware('auth:sanctum')->put('/approveSchool/{schoolId}', [AdminController::class, 'approveSchool']);
