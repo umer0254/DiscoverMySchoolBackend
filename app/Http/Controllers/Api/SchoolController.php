@@ -11,12 +11,7 @@ use App\Models\School;
 
 class SchoolController extends Controller
 {
-    public function getAllSchools()
-    {
-        $schools = School::all();
-
-        return response()->json(['schools' => $schools], 200);
-    }
+   
 
 
     public function registerSchool(Request $request)
