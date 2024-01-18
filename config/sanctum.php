@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Sanctum\Sanctum;
+use App\Models\User;
 
 return [
 
@@ -47,6 +48,7 @@ return [
     */
 
     'expiration' => 60,
+
 
     /*
     |--------------------------------------------------------------------------

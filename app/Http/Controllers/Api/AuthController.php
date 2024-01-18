@@ -66,21 +66,29 @@ class AuthController extends Controller
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::User();
+                $user->tokens()->delete();
                 $success['token'] = $user->createToken('MyApp')->plainTextToken;
                 $success['name'] = $user->first_name;
                 $success['user_type'] = $user->user_type;
-                return self::apiResponse(true, "User Login Successful", $success, 200);
             } else {
                 return self::apiResponse(false, "User Login Failed", [], 422);
-
             }
+    
+            // Add this line to revoke tokens, whether the login attempt was successful or not
+            // $user->tokens()->delete();
+    
+            return self::apiResponse(true, "User Login Successful", $success, 200);
         } catch (\Throwable $th) {
             return self::apiResponse(false, $th->getMessage(), [], 422);
         }
-
-
     }
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
 
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+    
 
 
 }
