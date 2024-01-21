@@ -40,5 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/studentregistration', [StudentController::class, 'registerStudent']);
     Route::post('/schoolregistration', [SchoolController::class, 'registerSchool']);
     Route::put('/approveSchool/{schoolId}', [AdminController::class, 'approveSchool']);
+    Route::post('/approveSchool/{schoolId}', [AdminController::class, 'approveSchool']);
  
 });

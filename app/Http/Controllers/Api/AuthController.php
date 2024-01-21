@@ -33,34 +33,28 @@ class AuthController extends Controller
                 'phone_number' => 'required',
                 'last_name' => 'required',
                 'user_type' => 'required'
-
             ]);
+    
             if ($validator->fails()) {
-                return self::apiResponse(false, $validator->errors(), [
-                    "email" => "test@gmail.com",
-                    "password" => "123",
-                    "c_password" => "123",
-                    "first_name" => "Dell",
-                    "last_name" => "Latitude",
-                    "phone_number" => "03002119781",
-                    "user_type" => "school"
-
-                ], 422);
+                $errors = $validator->errors()->toArray();
+                return self::apiResponse(false, $errors, [], 422);
             }
+    
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
-
+    
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
             $success['name'] = $user->first_name;
-
+    
             return self::apiResponse(true, "User Registered Successfully", $success, 200);
-
+    
         } catch (\Throwable $th) {
             return self::apiResponse(false, $th->getMessage(), [], 422);
         }
-
     }
+    
+    
     public function login(Request $request)
     {
         try {

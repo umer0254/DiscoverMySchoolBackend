@@ -14,7 +14,6 @@ class StudentController extends Controller
     public function getMyStudents()
     {
         if (!Auth::check()) {
-            // Return a response indicating authentication failure
             return response()->json(['message' => 'Authentication failed'], 401);
         }
 
@@ -71,9 +70,7 @@ class StudentController extends Controller
             'applying_for_class' => $request->input('applying_for_class'),
         ]);
 
-        // Optionally, you can perform additional actions here
-
-        // Return a response indicating success
+       
         return response()->json(['message' => 'Student registered successfully', 'student' => $student], 200);
     }
 }

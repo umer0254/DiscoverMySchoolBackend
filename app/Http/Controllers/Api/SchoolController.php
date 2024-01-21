@@ -25,7 +25,7 @@ class SchoolController extends Controller
         // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'school_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:schools', // Assuming 'schools' is the table name for your School model
+            'email' => 'required|email|unique:schools', 
             'address' => 'required|string|max:255',
             'contact_number' => 'required|string|max:20',
             'admission_fee' => 'required|numeric',
@@ -35,7 +35,7 @@ class SchoolController extends Controller
             // 'admin_id' => 'required|exists:users,id',
         ]);
 
-        // Check if validation fails
+        
         if ($validator->fails()) {
             // Return a response with validation errors
             return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
@@ -53,9 +53,7 @@ class SchoolController extends Controller
             'user_id' => $loggedInUserId
         ]);
 
-        // Optionally, you can perform additional actions here, such as sending email notifications, etc.
-
-        // Return a response indicating success
+       
         return response()->json(['message' => 'School registered successfully', 'school' => $school], 200);
     }
 
