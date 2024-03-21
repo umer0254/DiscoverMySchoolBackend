@@ -19,14 +19,16 @@ return new class extends Migration
             $table->string('contact_number');
             $table->boolean('is_approved')->default(false);
             $table->decimal('admission_fee', 10, 2);
-            $table->enum('admission_status', ['open', 'closed'])->default('open');
+            $table->enum('admission_status', ['Open', 'Closed'])->default('open');
             $table->decimal('tuition_fee', 10, 2);
-            $table->string('school_type');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('city');
+            $table->string('area');
+            $table->enum('board', ['Aga Khan', 'Cambridge','Federal','Matric'])->default('aga khan');
         });
     }
 

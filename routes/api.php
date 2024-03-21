@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/userlogin', [AuthController::class, 'login'])->name('userlogin');
 Route::post('/userregistrattion', [AuthController::class, 'register'])->name('userlogin');
-Route::get('/getAllSchools', [AdminController::class, 'getAllSchools'])->name('getAllSchools');
+Route::post('/getAllSchools', [AdminController::class, 'getAllSchools'])->name('getAllSchools');
 Route::get('/getUnapprovedSchools', [AdminController::class, 'getUnapprovedSchools'])->name('getUnapprovedSchools');
 
 

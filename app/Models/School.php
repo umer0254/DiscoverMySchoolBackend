@@ -20,7 +20,10 @@ class School extends Model
         'address',
         'admin_id',
         'user_id',
-        'is_approved'
+        'is_approved',
+        'board',
+        'city',
+        'area'
     ];
 
 

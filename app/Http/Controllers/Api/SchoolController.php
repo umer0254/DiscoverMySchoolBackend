@@ -30,7 +30,9 @@ class SchoolController extends Controller
             'contact_number' => 'required|string|max:20',
             'admission_fee' => 'required|numeric',
             'tuition_fee' => 'required|numeric',
-            'school_type' => 'required|string|max:255',
+            'board' => 'required',
+            'area' => 'required|string|max:30',
+            'city' => 'required',
             // 'user_id' =>   $loggedInUserId ,
             // 'admin_id' => 'required|exists:users,id',
         ]);
@@ -49,7 +51,10 @@ class SchoolController extends Controller
             'contact_number' => $request->input('contact_number'),
             'admission_fee' => $request->input('admission_fee'),
             'tuition_fee' => $request->input('tuition_fee'),
-            'school_type' => $request->input('school_type'),
+            'board' => $request->input('board'),
+            'city' => $request->input('city'),
+            'area' => $request->input('area'),
+            // 'school_type' => $request->input('school_type'),
             'user_id' => $loggedInUserId
         ]);
 

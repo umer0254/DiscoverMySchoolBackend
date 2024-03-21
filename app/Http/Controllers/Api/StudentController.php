@@ -71,6 +71,6 @@ class StudentController extends Controller
         ]);
 
        
-        return response()->json(['message' => 'Student registered successfully', 'student' => $student], 200);
+        return response()->json(['message' => 'Profile Created successfully', 'student' => $student], 200);
     }
 }
