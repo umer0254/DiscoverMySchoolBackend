@@ -13,48 +13,41 @@ class AdminController extends Controller
 {
     public function getAllSchools(Request $request)
     {
-        // $user = Auth::user();
-        // if (!$user) {
-        //     return response()->json(['error' => 'Unauthorized'], 403);
-        // }
+       
 
-        // Get search query parameters
-        $name = $request->input('school_name');
-        $area = $request->input('area');
-        // $min_tuition_fee = $request->input('min_tuition_fee');
-        $max_tuition_fee = $request->input('max_tuition_fee');
-        $city = $request->input('city');
-        $board = $request->input('board');
+    // Get search query parameters
+    $name = $request->input('school_name');
+    $area = $request->input('area');
+    $max_tuition_fee = $request->input('max_tuition_fee');
+    $city = $request->input('city');
+    $board = $request->input('board');
 
-        // Query schools based on search and filters
-        $query = School::query();
+    // Start with a base query of all schools where is_approved is true
+    $query = School::where('is_approved', true);
 
-        if ($name) {
-            $query->where('school_name', 'LIKE', "%$name%");
-        }
-        if ($city) {
-            $query->where('city', '=', $city);
-        }        
-        if ($board) {
-            $query->where('board', '=', $board);
-        }        
+    // Apply filters
+    if ($name) {
+        $query->where('school_name', 'LIKE', "%$name%");
+    }
+    if ($city) {
+        $query->where('city', $city);
+    }
+    if ($board) {
+        $query->where('board', $board);
+    }
+    if ($area) {
+        $query->where('area', $area);
+    }
+    if ($max_tuition_fee) {
+        $query->where('tuition_fee', '<=', $max_tuition_fee);
+    }
 
-        if ($area) {
-            $query->where('area', '=', $area);
-        }
+    // Get the result
+    $schools = $query->get();
 
-        if ($max_tuition_fee) {
-            $query->where('tuition_fee', '<=', $max_tuition_fee);}
-        // } elseif ($min_tuition_fee !== null) {
-        //     $query->where('tuition_fee', '>=', $min_tuition_fee);
-        // } elseif ($max_tuition_fee !== null) {
-        //     $query->where('tuition_fee', '<=', $max_tuition_fee);
-        // }
+    return response()->json(['schools' => $schools], 200);
 
 
-        $schools = $query->get();
-
-        return response()->json(['schools' => $schools], 200);
     }
 
     public function getUnapprovedSchools()

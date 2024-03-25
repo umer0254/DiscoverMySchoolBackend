@@ -19,6 +19,16 @@ class Student extends Model
         'address',
         'father_cnic',
         'student_cnic',
-        'applying_for_class'
+        'applying_for_class',
+        'mother_education',
+        'father_education'
+        
     ];
+    
+    public function applications()
+{
+    return $this->hasMany(Application::class);
+}
+
+
 }

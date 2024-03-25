@@ -8,6 +8,7 @@ use Validator;
 use Auth;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Application;
 
 class StudentController extends Controller
 {
@@ -62,7 +63,9 @@ class StudentController extends Controller
             'date_of_birth' => $request->input('date_of_birth'),
             'father_occupation' => $request->input('father_occupation'),
             'father_name' => $request->input('father_name'),
+            'father_education' => $request->input('father_education'),
             'mother_name' => $request->input('mother_name'),
+            'mother_education' => $request->input('mother_education'),
             'mother_occupation' => $request->input('mother_occupation'),
             'address' => $request->input('address'),
             'father_cnic' => $request->input('father_cnic'),
@@ -73,4 +76,32 @@ class StudentController extends Controller
        
         return response()->json(['message' => 'Profile Created successfully', 'student' => $student], 200);
     }
+    // ApplicationController.php
+public function apply(Request $request) {
+    if (!auth()->check()) {
+        return response()->json(['message' => 'Authentication failed'], 401);
+    }
+    $request->validate([
+        'student_id' => 'required|exists:students,id',
+        'school_id' => 'required|exists:schools,id'
+    ]);
+
+    $application = new Application();
+    $application->student_id = $request->input('student_id');
+    $application->school_id = $request->input('school_id');
+    $application->save();
+
+    return response()->json(['message' => 'Application submitted successfully'], 201);
+}
+public function studentapplications($studentId)
+{
+    // Find the student Applications
+    $student = Student::findOrFail($studentId);
+
+    // Retrieve applications for the school with student data
+    $applications = $student->applications()->with('school')->get();
+
+    return response()->json($applications);
+}
+
 }

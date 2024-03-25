@@ -29,6 +29,15 @@ return new class extends Migration
             $table->string('city');
             $table->string('area');
             $table->enum('board', ['Aga Khan', 'Cambridge','Federal','Matric'])->default('aga khan');
+            $table->string('school_image')->nullable();
+            $table->string('principal_name')->nullable();
+            $table->string('principal_contact')->nullable();
+            $table->string('principal_qualifications')->nullable();
+            $table->text('principal_biography')->nullable();
+            $table->text('mission_statement')->nullable();
+            $table->text('school_history')->nullable();
+            $table->text('facilities')->nullable();
+            $table->text('extracurricular_activities')->nullable();
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('first_name');
             $table->string('last_name');
-            $table->enum('user_type', ['Admin', 'Student','School']);
+            $table->enum('user_type', ['Admin', 'Parent','School']);
             $table->timestamps();
             $table->rememberToken();
         });

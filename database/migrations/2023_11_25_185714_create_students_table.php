@@ -18,7 +18,9 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->string('father_occupation');
             $table->string('father_name');
+            $table->string('father_education');
            $table->string('mother_name');
+           $table->string('mother_education');
             $table->string('mother_occupation');
             $table->string('address');
             $table->string('father_cnic');
