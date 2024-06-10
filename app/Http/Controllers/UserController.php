@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use App\Models\User;
+use App\Models\School;
+
 
 class UserController extends Controller
 {
@@ -76,5 +78,7 @@ class UserController extends Controller
 
 
     }
+
+
     //
 }
